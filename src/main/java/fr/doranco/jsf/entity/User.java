@@ -110,4 +110,4 @@ public class User implements Serializable {
 				+ ", niveaudeservice=" + niveaudeservice + "]";
 	}
 
-}
+}//test
