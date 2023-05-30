@@ -10,8 +10,10 @@ public class Adresse {
 	private Integer userId;
 	
 	
-	public Adresse(Integer id, String numero, String rue, String ville, String codePostal, Integer userId) {
-		this.id = id;
+	public Adresse() {
+	}
+
+	public Adresse(String numero, String rue, String ville, String codePostal, Integer userId) {
 		this.numero = numero;
 		this.rue = rue;
 		this.ville = ville;

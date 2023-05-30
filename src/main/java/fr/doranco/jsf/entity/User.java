@@ -26,6 +26,7 @@ public class User implements Serializable {
 	private List<Commentaire> commentaires;
 	private List<ArticlePanier> panier;
 
+	
 	public User() {
 		this.adresses = new ArrayList<Adresse>();
 		this.commandes = new ArrayList<Commande>();

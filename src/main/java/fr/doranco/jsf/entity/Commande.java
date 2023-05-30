@@ -19,7 +19,7 @@ public class Commande {
 	private List<LigneDeCommande> lignesCommande;
 	
 	public Commande(Integer numero, Date dateCreation, Date dateLivraison, String totalRemise,
-			String fraisExpedition, String totalGeneral, String adresseFacturation, String adresseLivraison) {
+			String fraisExpedition, String totalGeneral, String adresseFacturation, String adresseLivraison, Integer userId) {
 		this.numero = numero;
 		this.dateCreation = dateCreation;
 		this.dateLivraison = dateLivraison;
@@ -28,6 +28,7 @@ public class Commande {
 		this.totalGeneral = totalGeneral;
 		this.adresseFacturation = adresseFacturation;
 		this.adresseLivraison = adresseLivraison;
+		this.userId = userId;
 	}
 
 	public Integer getId() {
