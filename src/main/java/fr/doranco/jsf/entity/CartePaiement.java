@@ -10,7 +10,7 @@ public class CartePaiement {
 	private Byte[] numero;
 	private Date dateFinValidite;
 	private Byte[] cryptogramme;
-	private Integer utilisateur;
+	private Integer userId;
 	
 	
 	
@@ -50,11 +50,11 @@ public class CartePaiement {
 	public void setCryptogramme(Byte[] cryptogramme) {
 		this.cryptogramme = cryptogramme;
 	}
-	public Integer getUtilisateur() {
-		return utilisateur;
+	public Integer getUserId() {
+		return userId;
 	}
-	public void setUtilisateur(Integer utilisateur) {
-		this.utilisateur = utilisateur;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	
 }
