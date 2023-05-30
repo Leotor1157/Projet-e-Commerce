@@ -18,7 +18,7 @@ public class User implements Serializable {
 	private Boolean isActif;
 	private ProfilEnum profil;
 	private String email;
-	private Byte[] password;
+	private String password;
 	private String telephone;
 	private List<Adresse> adresses;
 	private List<Commande> commandes;
@@ -84,11 +84,11 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public Byte[] getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(Byte[] password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
