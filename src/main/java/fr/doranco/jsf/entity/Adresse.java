@@ -7,15 +7,16 @@ public class Adresse {
 	private String rue;
 	private String ville;
 	private String codePostal;
+	private Integer userId;
 	
-	public Adresse() {
-	}
-
-	public Adresse(String numero, String rue, String ville, String codePostal) {
+	
+	public Adresse(Integer id, String numero, String rue, String ville, String codePostal, Integer userId) {
+		this.id = id;
 		this.numero = numero;
 		this.rue = rue;
 		this.ville = ville;
 		this.codePostal = codePostal;
+		this.userId = userId;
 	}
 
 	public Integer getId() {
@@ -56,6 +57,14 @@ public class Adresse {
 
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	@Override
