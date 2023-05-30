@@ -27,6 +27,18 @@ public class User implements Serializable {
 	private List<ArticlePanier> panier;
 
 	
+	public User(String nom, String prenom, Date dateNaissance, Boolean isActif, ProfilEnum profil, String email,
+			String password, String telephone) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dateNaissance = dateNaissance;
+		this.isActif = isActif;
+		this.profil = profil;
+		this.email = email;
+		this.password = password;
+		this.telephone = telephone;
+	}
+
 	public User() {
 		this.adresses = new ArrayList<Adresse>();
 		this.commandes = new ArrayList<Commande>();
