@@ -32,7 +32,11 @@ public class AdresseBean {
 	}
 
 	public void addAdresse() {
-		Adresse adresse = new Adresse(numero, rue, ville, codePostal);
+		Adresse adresse = new Adresse();
+		adresse.setNumero(numero);
+		adresse.setRue(rue);
+		adresse.setVille(ville);
+		adresse.setCodePostal(codePostal);
 		adresses.add(adresse);
 	}
 	

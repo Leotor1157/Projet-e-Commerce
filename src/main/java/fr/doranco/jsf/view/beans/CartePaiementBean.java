@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import fr.doranco.jsf.entity.Adresse;
+import fr.doranco.jsf.entity.CartePaiement;
 
 @ManagedBean(name = "cartePaiementbean")
 @SessionScoped
@@ -30,8 +31,8 @@ public class CartePaiementBean {
 	}
 
 	public void addCartePaiement() {
-		CartePaiement cartePaiement = new CartePaiement(nomProprietaire, prenomProprietaire, numero, dateFinValidite, cryptogramme);
-		cartePaiements.add(cartePaiement);
+		//CartePaiement cartePaiement = new CartePaiement(nomProprietaire, prenomProprietaire, numero, dateFinValidite, cryptogramme);
+		//cartePaiements.add(cartePaiement);
 	}
 	
 	public void initializeCartePaiement() {

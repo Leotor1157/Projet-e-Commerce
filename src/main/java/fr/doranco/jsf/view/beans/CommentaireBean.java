@@ -6,6 +6,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import fr.doranco.jsf.entity.Commentaire;
+
 @ManagedBean(name = "commentairebean")
 @SessionScoped
 public class CommentaireBean {
@@ -20,8 +22,8 @@ public class CommentaireBean {
 	}
 
 	public void addCommentaire() {
-		Commentaire commentaire = new Commentaire(texte, note);
-		commentaires.add(commentaire);
+		//Commentaire commentaire = new Commentaire(texte, note);
+		//commentaires.add(commentaire);
 	}
 	
 	public void initializeCommentaire() {
