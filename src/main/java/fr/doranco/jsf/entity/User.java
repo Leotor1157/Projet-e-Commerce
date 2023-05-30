@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import fr.doranco.jsf.enums.ProfilEnum;
+
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -14,9 +16,9 @@ public class User implements Serializable {
 	private String prenom;
 	private Date dateNaissance;
 	private Boolean isActif;
-	private String profil;
+	private ProfilEnum profil;
 	private String email;
-	private String password;
+	private Byte[] password;
 	private String telephone;
 	private List<Adresse> adresses;
 	private List<Commande> commandes;
@@ -82,11 +84,11 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public String getPassword() {
+	public Byte[] getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(Byte[] password) {
 		this.password = password;
 	}
 
@@ -96,6 +98,14 @@ public class User implements Serializable {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+
+	public ProfilEnum getProfil() {
+		return profil;
+	}
+
+	public void setProfil(ProfilEnum profil) {
+		this.profil = profil;
 	}
 
 	public List<Adresse> getAdresses() {
