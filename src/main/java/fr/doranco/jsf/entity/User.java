@@ -10,21 +10,26 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	private String genre;
-	private String prenom;
 	private String nom;
+	private String prenom;
 	private Date dateNaissance;
+	private Boolean isActif;
+	private String profil;
 	private String email;
 	private String password;
-	private String niveauService;
-	private List<String> langagesSouhaites;
+	private String telephone;
 	private List<Adresse> adresses;
-
-	public String niveaudeservice;
+	private List<Commande> commandes;
+	private List<CartePaiement> cartesDePayement;
+	private List<Commentaire> commentaires;
+	private List<ArticlePanier> panier;
 
 	public User() {
-		this.langagesSouhaites = new ArrayList<String>();
 		this.adresses = new ArrayList<Adresse>();
+		this.commandes = new ArrayList<Commande>();
+		this.cartesDePayement = new ArrayList<CartePaiement>();
+		this.commentaires = new ArrayList<Commentaire>();
+		this.panier = new ArrayList<ArticlePanier>();
 	}
 
 	public Integer getId() {
@@ -34,29 +39,21 @@ public class User implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public String getGenre() {
-		return genre;
-	}
-
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
+	
 	public String getNom() {
 		return nom;
 	}
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+	
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
 	}
 
 	public Date getDateNaissance() {
@@ -67,6 +64,16 @@ public class User implements Serializable {
 		this.dateNaissance = dateNaissance;
 	}
 
+	public Boolean getIsActif() {
+		return isActif;
+	}
+	
+	public void setIsActif(Boolean isActif) {
+		this.isActif = isActif;
+	}
+	
+	
+	
 	public String getEmail() {
 		return email;
 	}
@@ -83,31 +90,38 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public String getNiveauService() {
-		return niveauService;
+	public String getTelephone() {
+		return telephone;
 	}
 
-	public void setNiveauService(String niveauService) {
-		this.niveauService = niveauService;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public List<String> getLangagesSouhaites() {
-		return langagesSouhaites;
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 
 	public List<Adresse> getAdresses() {
 		return adresses;
 	}
-
-	@Override
-	public String toString() {
-		return "User [genre=" + genre + ", prenom=" + prenom + ", nom=" + nom + ", dateNaissance=" + dateNaissance
-				+ ", email=" + email + ", password=" + password + ", niveauService=" + niveauService
-				+ ", niveaudeservice=" + niveaudeservice + "]";
+	
+	public List<Commande> getCommandes() {
+		return commandes;
 	}
 
-}//test2
+	public List<CartePaiement> getCartesDePayement() {
+		return cartesDePayement;
+	}
+	
+	public List<Commentaire> getCommentaires() {
+		return commentaires;
+	}
+	
+	public List<ArticlePanier> getPanier() {
+		return panier;
+	}
+	
+	@Override
+	public String toString() {
+		return "User [prenom=" + prenom + ", nom=" + nom + ", dateNaissance=" + dateNaissance
+				+ ", email=" + email + ", password=" + password + "]";
+	}
+
+}
