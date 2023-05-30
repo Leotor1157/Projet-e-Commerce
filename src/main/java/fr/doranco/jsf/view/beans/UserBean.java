@@ -12,6 +12,7 @@ import javax.faces.bean.SessionScoped;
 import fr.doranco.jsf.control.impl.UserMetier;
 import fr.doranco.jsf.control.interfaces.IUserMetier;
 import fr.doranco.jsf.entity.User;
+import fr.doranco.jsf.enums.ProfilEnum;
 
 @ManagedBean(name = "userbean")
 @SessionScoped
@@ -22,28 +23,24 @@ public class UserBean implements Serializable {
 	// injection de dépendance
 	@ManagedProperty(value = "#{adressebean}")
 	private static AdresseBean adresseBean;
-
-	@ManagedProperty(name = "genre", value = "M.")
-	private String genre;
+	
+	@ManagedProperty(name = "nom", value = "DUPOND")
+	private String nom;
 
 	@ManagedProperty(name = "prenom", value = "Michel")
 	private String prenom;
 
-	@ManagedProperty(name = "nom", value = "DUPOND")
-	private String nom;
-
 	private Date dateNaissance;
+	
+	private ProfilEnum profil;
 
 	@ManagedProperty(name = "email", value = "michel.dupont@doranco.fr")
 	private String email;
 
 	private String password;
 	private String passwordConfirmation;
-
-	@ManagedProperty(value = "Medium")
-	private String niveauService;
-
-	private List<String> langagesSouhaites;
+	
+	private String telephone;
 
 	private String messageSuccess;
 	private String messageError;
@@ -77,14 +74,13 @@ public class UserBean implements Serializable {
 			}
 
 			User user = new User();
-			user.setGenre(genre);
 			user.setNom(nom);
 			user.setPrenom(prenom);
 			user.setDateNaissance(dateNaissance);
 			user.setEmail(email);
-			user.setNiveauService(niveauService);
+			user.setProfil(profil);
 			user.setPassword(password);
-			langagesSouhaites.forEach(langage -> user.getLangagesSouhaites().add(langage));
+			user.setTelephone(telephone);
 
 			adresseBean.getAdresses().forEach(a -> user.getAdresses().add(a));
 
@@ -125,9 +121,8 @@ public class UserBean implements Serializable {
 		this.nom = "";
 		this.prenom = "";
 		this.email = "";
-		this.genre = "";
-		this.niveauService = "";
-		this.langagesSouhaites.clear();
+		this.profil = ProfilEnum.CLIENT;
+		this.telephone = "";
 		this.dateNaissance = null;
 	}
 
@@ -137,14 +132,6 @@ public class UserBean implements Serializable {
 
 	public void setAdresseBean(AdresseBean adresseBean) {
 		this.adresseBean = adresseBean;
-	}
-
-	public String getGenre() {
-		return genre;
-	}
-
-	public void setGenre(String genre) {
-		this.genre = genre;
 	}
 
 	public String getPrenom() {
@@ -171,6 +158,14 @@ public class UserBean implements Serializable {
 		this.dateNaissance = dateNaissance;
 	}
 
+	public ProfilEnum getProfil() {
+		return profil;
+	}
+
+	public void setProfil(ProfilEnum profil) {
+		this.profil = profil;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -195,20 +190,12 @@ public class UserBean implements Serializable {
 		this.passwordConfirmation = passwordConfirmation;
 	}
 
-	public String getNiveauService() {
-		return niveauService;
+	public String getTelephone() {
+		return telephone;
 	}
 
-	public void setNiveauService(String niveauService) {
-		this.niveauService = niveauService;
-	}
-
-	public List<String> getLangagesSouhaites() {
-		return langagesSouhaites;
-	}
-
-	public void setLangagesSouhaites(List<String> langagesSouhaites) {
-		this.langagesSouhaites = langagesSouhaites;
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 
 	public String getMessageSuccess() {
