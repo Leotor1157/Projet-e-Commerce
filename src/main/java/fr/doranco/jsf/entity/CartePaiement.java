@@ -14,10 +14,10 @@ public class CartePaiement {
 	
 	
 	
-	private CartePaiement() {
+	public CartePaiement() {
 	}
 	
-	private CartePaiement(String nomProprietaire, String prenomProprietaire, String numero, Date dateFinValidite,
+	public CartePaiement(String nomProprietaire, String prenomProprietaire, String numero, Date dateFinValidite,
 			String cryptogramme, Integer userId) {
 		this.nomProprietaire = nomProprietaire;
 		this.prenomProprietaire = prenomProprietaire;
