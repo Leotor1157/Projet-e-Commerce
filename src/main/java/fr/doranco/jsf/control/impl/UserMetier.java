@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.doranco.jsf.control.interfaces.IUserMetier;
 import fr.doranco.jsf.entity.User;
+import fr.doranco.jsf.enums.ProfilEnum;
 import fr.doranco.jsf.model.dao.impl.UserDao;
 import fr.doranco.jsf.model.dao.interfaces.IUserDao;
 
@@ -19,6 +20,12 @@ public class UserMetier implements IUserMetier {
 		user.setNom(user.getNom().toUpperCase());
 		user.setPrenom(user.getPrenom().substring(0, 1).toUpperCase()
 						.concat(user.getPrenom().substring(1).toLowerCase()));
+		if(user.getIsActif() == null) {
+		user.setIsActif(false);
+		}
+		if(user.getProfil() == null) {
+			user.setProfil(ProfilEnum.CLIENT);
+		}
 		return userDao.addUser(user);
 	}
 
