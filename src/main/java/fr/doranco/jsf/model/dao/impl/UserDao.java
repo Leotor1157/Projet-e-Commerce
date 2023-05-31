@@ -100,7 +100,7 @@ public class UserDao implements IUserDao {
 		List<User> users = new ArrayList<User>();
 		try {
 			connection = DataBaseConnection.getConnection();
-			String requete = "SELECT * FROM user";
+			String requete = "SELECT * FROM utilisateur";
 			ps = connection.prepareStatement(requete);
 
 			ps.execute();
