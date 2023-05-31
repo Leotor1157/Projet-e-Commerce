@@ -11,6 +11,7 @@ import java.util.StringTokenizer;
 
 import fr.doranco.jsf.entity.Adresse;
 import fr.doranco.jsf.entity.User;
+import fr.doranco.jsf.enums.ProfilEnum;
 import fr.doranco.jsf.model.connection.DataBaseConnection;
 import fr.doranco.jsf.model.dao.interfaces.IAdresseDao;
 import fr.doranco.jsf.model.dao.interfaces.IUserDao;
@@ -29,23 +30,18 @@ public class UserDao implements IUserDao {
 		try {
 			connection = DataBaseConnection.getConnection();
 			
-			String requete = "INSERT INTO user(genre, prenom, nom, date_naissance, email, password, niveau_service, langages)"
+			String requete = "INSERT INTO utilisateur(prenom, nom, date_naissance, email, password, is_actif, profil, telephone )"
 					+ " VALUES(?,?,?,?,?,?,?,?)";
 			ps = connection.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
-			ps.setString(1, user.getGenre());
-			ps.setString(2, user.getPrenom());
-			ps.setString(3, user.getNom());
-			ps.setDate(4, Dates.convertDateUtilToSql(user.getDateNaissance()));
-			ps.setString(5, user.getEmail());
-			ps.setString(6, user.getPassword());
-			ps.setString(7, user.getNiveauService());
+			ps.setString(1, user.getPrenom());
+			ps.setString(2, user.getNom());
+			ps.setDate(3, Dates.convertDateUtilToSql(user.getDateNaissance()));
+			ps.setString(4, user.getEmail());
+			ps.setString(5, user.getPassword());
+			ps.setBoolean(6,user.getIsActif());
+			ps.setString(7,user.getProfil().toString());
+			ps.setString(8,user.getTelephone());
 			
-			String langagesSouhaites = "";  // JAVA:PHP:C++
-			for (String langage : user.getLangagesSouhaites()) {
-				langagesSouhaites = langagesSouhaites.concat(langage).concat(":");
-			}
-			langagesSouhaites = langagesSouhaites.substring(0, langagesSouhaites.length() - 1);
-			ps.setString(8, langagesSouhaites);
 			
 			ps.executeUpdate();
 			rs = ps.getGeneratedKeys();
@@ -116,19 +112,15 @@ public class UserDao implements IUserDao {
 				while (rs.next()) {
 					User user = new User();
 					user.setId(rs.getInt("id"));
-					user.setGenre(rs.getString("genre"));
 					user.setPrenom(rs.getString("prenom"));
 					user.setNom(rs.getString("nom"));
 					user.setDateNaissance(Dates.convertDateSqlToUtil(rs.getDate("date_naissance")));
 					user.setEmail(rs.getString("email"));
 					user.setPassword(rs.getString("password"));
-					user.setNiveauService(rs.getString("niveau_service"));
+					user.setTelephone(rs.getString("telephone"));
+					user.setProfil(ProfilEnum.valueOf(rs.getString("profil")));
+					user.setIsActif(rs.getBoolean("is_actif"));
 					
-					StringTokenizer tokenizer = new StringTokenizer(rs.getString("langages"), ":");
-					while (tokenizer.hasMoreTokens()) {
-						String value = tokenizer.nextToken();
-						user.getLangagesSouhaites().add(value);
-					}
 					
 					List<Adresse> adresses = adresseDao.getAdresses(rs.getInt("id"));
 					for (Adresse a : adresses) {
