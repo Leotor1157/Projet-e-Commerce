@@ -24,6 +24,10 @@ public class UserBean implements Serializable {
 	@ManagedProperty(value = "#{adressebean}")
 	private static AdresseBean adresseBean;
 	
+	// injection de dépendance
+	@ManagedProperty(value = "#{cartePaiementbean}")
+	private static CartePaiementBean cartePaiementBean;
+	
 	@ManagedProperty(name = "nom", value = "DUPOND")
 	private String nom;
 
