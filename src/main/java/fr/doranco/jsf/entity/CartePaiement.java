@@ -14,6 +14,18 @@ public class CartePaiement {
 	
 	
 	
+	private CartePaiement() {
+	}
+	
+	private CartePaiement(String nomProprietaire, String prenomProprietaire, String numero, Date dateFinValidite,
+			String cryptogramme, Integer userId) {
+		this.nomProprietaire = nomProprietaire;
+		this.prenomProprietaire = prenomProprietaire;
+		this.numero = numero;
+		this.dateFinValidite = dateFinValidite;
+		this.cryptogramme = cryptogramme;
+		this.userId = userId;
+	}
 	public Integer getId() {
 		return id;
 	}

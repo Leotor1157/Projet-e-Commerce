@@ -87,6 +87,7 @@ public class UserBean implements Serializable {
 			user.setTelephone(telephone);
 
 			adresseBean.getAdresses().forEach(a -> user.getAdresses().add(a));
+			cartePaiementBean.getCartePaiements().forEach(a -> user.getCartesDePaiement().add(a));
 
 			User addedUser = userMetier.addUser(user);
 
