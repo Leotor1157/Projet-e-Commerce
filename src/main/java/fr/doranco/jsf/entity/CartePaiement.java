@@ -7,9 +7,9 @@ public class CartePaiement {
 	private Integer id;
 	private String nomProprietaire;
 	private String prenomProprietaire;
-	private Byte[] numero;
+	private String numero;
 	private Date dateFinValidite;
-	private Byte[] cryptogramme;
+	private String cryptogramme;
 	private Integer userId;
 	
 	
@@ -32,10 +32,10 @@ public class CartePaiement {
 	public void setPrenomProprietaire(String prenomProprietaire) {
 		this.prenomProprietaire = prenomProprietaire;
 	}
-	public Byte[] getNumero() {
+	public String getNumero() {
 		return numero;
 	}
-	public void setNumero(Byte[] numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 	public Date getDateFinValidite() {
@@ -44,10 +44,10 @@ public class CartePaiement {
 	public void setDateFinValidite(Date dateFinValidite) {
 		this.dateFinValidite = dateFinValidite;
 	}
-	public Byte[] getCryptogramme() {
+	public String getCryptogramme() {
 		return cryptogramme;
 	}
-	public void setCryptogramme(Byte[] cryptogramme) {
+	public void setCryptogramme(String cryptogramme) {
 		this.cryptogramme = cryptogramme;
 	}
 	public Integer getUserId() {
