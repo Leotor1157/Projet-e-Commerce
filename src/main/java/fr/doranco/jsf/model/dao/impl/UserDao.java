@@ -30,7 +30,7 @@ public class UserDao implements IUserDao {
 		try {
 			connection = DataBaseConnection.getConnection();
 			
-			String requete = "INSERT INTO user(prenom, nom, date_naissance, email, password, is_actif, profil, telephone )"
+			String requete = "INSERT INTO utilisateur(prenom, nom, date_naissance, email, password, is_actif, profil, telephone )"
 					+ " VALUES(?,?,?,?,?,?,?,?)";
 			ps = connection.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, user.getPrenom());
@@ -38,9 +38,10 @@ public class UserDao implements IUserDao {
 			ps.setDate(3, Dates.convertDateUtilToSql(user.getDateNaissance()));
 			ps.setString(4, user.getEmail());
 			ps.setString(5, user.getPassword());
-			ps.setString(6,user.getProfil().toString());
-			ps.setString(7,user.getTelephone());
-			ps.setBoolean(8,user.getIsActif());
+			ps.setBoolean(6,user.getIsActif());
+			ps.setString(7,user.getProfil().toString());
+			ps.setString(8,user.getTelephone());
+			
 			
 			ps.executeUpdate();
 			rs = ps.getGeneratedKeys();
