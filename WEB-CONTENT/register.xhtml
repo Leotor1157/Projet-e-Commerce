@@ -15,16 +15,6 @@
 	<h:form>
 		<h:panelGroup id="panelUser">
 
-			<h:panelGrid columns="3" cellpadding="0" cellspacing="2">
-				<h:outputLabel value="Genre : "></h:outputLabel>
-				<h:selectOneRadio id="genre" value="#{userbean.genre}"
-					required="true" requiredMessage="Le Genre est obligatoire">
-					<f:selectItem itemLabel="Monsieur" itemValue="M." />
-					<f:selectItem itemLabel="Madame" itemValue="Mme" />
-				</h:selectOneRadio>
-				<h:message for="genre" style="color:red"></h:message>
-			</h:panelGrid>
-
 			<h:panelGrid columns="3" cellpadding="0" cellspacing="8">
 
 				<h:outputLabel value="Nom : "></h:outputLabel>
@@ -74,28 +64,14 @@
 					(jj/mm/aaaa)
 				</h:inputText>
 				<h:message for="dateNaissance" style="color:red"></h:message>
+				
+				<h:outputLabel value="telephone" />
+				<h:inputText id="telephone" value = "#{userbean.telephone}" 
+					required = "true" requiredMessage="Le numero de telephone est obligatoire">
+					<f:validateLength minimum = "10" maximum = "10"/>
+				</h:inputText>
+				<h:message for="telephone" style ="color:red"></h:message>
 
-				<h:outputLabel value="Niveau de service : "></h:outputLabel>
-				<h:selectOneListbox id="niveauService"
-					value="#{userbean.niveauService}" required="true"
-					requiredMessage="Le niveau de service est obligatoire !">
-					<f:selectItem itemLabel="Basic" itemValue="Basic" />
-					<f:selectItem itemLabel="Medium" itemValue="Medium" />
-					<f:selectItem itemLabel="Premium" itemValue="Premium" />
-				</h:selectOneListbox>
-				<h:message for="niveauService" style="color:red"></h:message>
-
-				<h:outputLabel value="Langages souhaités : "></h:outputLabel>
-				<h:selectManyListbox id="langagesSouhaites"
-					value="#{userbean.langagesSouhaites}" required="true"
-					requiredMessage="Au moins un langage doit être sélectionné !">
-					<f:selectItem itemLabel="Java" itemValue="Java" />
-					<f:selectItem itemLabel="PHP" itemValue="PHP" />
-					<f:selectItem itemLabel="Python" itemValue="Python" />
-					<f:selectItem itemLabel="C++" itemValue="C++" />
-					<f:selectItem itemLabel="C#/.NET" itemValue="C#/.NET" />
-				</h:selectManyListbox>
-				<h:message for="langagesSouhaites" style="color:red"></h:message>
 
 			</h:panelGrid>
 
@@ -181,13 +157,6 @@
 
 			<h:column>
 				<!-- column header -->
-				<f:facet name="header">Genre</f:facet>
-				<!-- row record -->
-				<h:outputText value="#{u.genre}" />
-			</h:column>
-
-			<h:column>
-				<!-- column header -->
 				<f:facet name="header">Prénom</f:facet>
 				<!-- row record -->
 				<h:outputText value="#{u.prenom}" />
@@ -216,17 +185,8 @@
 			</h:column>
 
 			<h:column>
-				<f:facet name="header">Niveau de Service</f:facet>
-				<h:outputText value="#{u.niveauService}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">Langages souhaités</f:facet>
-				<h:outputText value="["></h:outputText>
-				<ui:repeat var="langage" value="#{u.langagesSouhaites}">
-					<h:outputText value="#{langage} " />
-				</ui:repeat>
-				<h:outputText value="]"></h:outputText>
+				<f:facet name="header">Numero de telephone</f:facet>
+				<h:outputText value="#{u.telephone}" />
 			</h:column>
 
 			<h:column>
