@@ -129,11 +129,8 @@ public class User implements Serializable {
 		return commandes;
 	}
 
-<<<<<<< HEAD
-	public List<CartePaiement> getCartesDePayement() {
-=======
 	public List<CartePaiement> getCartesDePaiement() {
->>>>>>> c7ddc1914886b7f5b7bd237d078565421de07b04
+
 		return cartesDePaiement;
 	}
 	
