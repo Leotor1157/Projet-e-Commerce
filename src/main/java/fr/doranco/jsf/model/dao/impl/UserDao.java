@@ -10,16 +10,19 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import fr.doranco.jsf.entity.Adresse;
+import fr.doranco.jsf.entity.CartePaiement;
 import fr.doranco.jsf.entity.User;
 import fr.doranco.jsf.enums.ProfilEnum;
 import fr.doranco.jsf.model.connection.DataBaseConnection;
 import fr.doranco.jsf.model.dao.interfaces.IAdresseDao;
+import fr.doranco.jsf.model.dao.interfaces.ICartepaiementDao;
 import fr.doranco.jsf.model.dao.interfaces.IUserDao;
 import fr.doranco.jsf.utils.Dates;
 
 public class UserDao implements IUserDao {
 
 	private final IAdresseDao adresseDao = new AdresseDao();
+	private final ICartepaiementDao cartePaiementDao = new CartePaiementDao();
 
 	@Override
 	public User addUser(User user) throws Exception {
@@ -50,6 +53,13 @@ public class UserDao implements IUserDao {
 			if (user.getAdresses() != null && !user.getAdresses().isEmpty()) {
 				for (Adresse a : user.getAdresses()) {
 					adresseDao.addAdresse(a, user.getId());
+				}
+			}
+			
+			if (user.getCartesDePaiement() != null && !user.getCartesDePaiement().isEmpty()) {
+				for (CartePaiement a : user.getCartesDePaiement()) {
+					a.setUserId(user.getId());
+					cartePaiementDao.createCartepaiement(a);
 				}
 			}
 

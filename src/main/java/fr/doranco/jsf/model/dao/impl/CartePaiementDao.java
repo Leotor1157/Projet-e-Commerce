@@ -8,6 +8,7 @@ import java.sql.Statement;
 import fr.doranco.jsf.entity.CartePaiement;
 import fr.doranco.jsf.model.connection.DataBaseConnection;
 import fr.doranco.jsf.model.dao.interfaces.ICartepaiementDao;
+import fr.doranco.jsf.utils.Dates;
 
 public class CartePaiementDao implements ICartepaiementDao {
 
@@ -18,12 +19,12 @@ public class CartePaiementDao implements ICartepaiementDao {
         ResultSet rs = null;
         try {
             connection = DataBaseConnection.getConnection();
-            String query = "INSERT INTO carte_paiement(nom_proprietaire, prenom_proprietaire, numero, date_fin_validite, cryptogramme, user_id) VALUES(?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO carte_paiement(nom_proprietaire, prenom_proprietaire, numero, date_fin_validite, cryptogramme, utilisateur_id) VALUES(?, ?, ?, ?, ?, ?)";
             ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, cartepaiement.getNomProprietaire());
             ps.setString(2, cartepaiement.getPrenomProprietaire());
             ps.setString(3, cartepaiement.getNumero());
-            ps.setDate(4, new java.sql.Date(cartepaiement.getDateFinValidite().getTime()));
+            ps.setDate(4, Dates.convertDateUtilToSql(cartepaiement.getDateFinValidite()));
             ps.setString(5, cartepaiement.getCryptogramme());
             ps.setInt(6, cartepaiement.getUserId());
 
@@ -101,6 +102,7 @@ public class CartePaiementDao implements ICartepaiementDao {
             ps.setString(1, cartepaiement.getNomProprietaire());
             ps.setString(2, cartepaiement.getPrenomProprietaire());
             ps.setString(3, cartepaiement.getNumero());
+            
             ps.setDate(4, new java.sql.Date(cartepaiement.getDateFinValidite().getTime()));
             ps.setString(5, cartepaiement.getCryptogramme());
             ps.setInt(6, cartepaiement.getUserId());

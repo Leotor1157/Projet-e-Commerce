@@ -14,26 +14,32 @@
 
 		<h:graphicImage library="images" name="doranco.png"></h:graphicImage>
 		<h3>Site Ecommerce</h3>
-		
-		 <h:form>
 
-            <c:set scope="request" var="row" property="x" value="#{userbean.isActif}"/>
+		<h:form>
 
-            <c:if test="#{userbean.isActif}">
-                <h:outputLabel value="Bonjour #{userbean.nom}"/>
-                <h:commandLink action="#{userbean.DeconnexionUser()}">
-						<h:outputText value="Deconnexion"></h:outputText>
-					</h:commandLink>
-            </c:if>
+			<c:set scope="request" var="row" property="x"
+				value="#{userbean.isActif}" />
 
-            <c:if test="#{!userbean.isActif}">
-                <h:commandLink action="login.xhtml">
-						<h:outputText value="Se connecter"></h:outputText>
-					</h:commandLink>
-            </c:if>
+			<c:if test="#{userbean.isActif}">
+				<h:outputLabel value="Bonjour #{userbean.nom}" />
+				<h:commandLink action="#{userbean.DeconnexionUser()}">
+					<h:outputText value="Deconnexion"></h:outputText>
+				</h:commandLink>
 
-        </h:form>
-        
+			</c:if>
+
+			<c:if test="#{!userbean.isActif}">
+				<h:commandLink action="login.xhtml">
+					<h:outputText value="Se connecter"></h:outputText>
+				</h:commandLink>
+				<p/>
+				<h:commandLink action="register.xhtml">
+					<h:outputText value="S'enregistrer"></h:outputText>
+				</h:commandLink>
+			</c:if>
+
+		</h:form>
+
 	</ui:composition>
 </body>
 </html>

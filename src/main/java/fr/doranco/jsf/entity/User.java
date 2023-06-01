@@ -128,15 +128,15 @@ public class User implements Serializable {
 	public List<Commande> getCommandes() {
 		return commandes;
 	}
-
-<<<<<<< HEAD
-	public List<CartePaiement> getCartesDePayement() {
-=======
+	
 	public List<CartePaiement> getCartesDePaiement() {
->>>>>>> c7ddc1914886b7f5b7bd237d078565421de07b04
 		return cartesDePaiement;
 	}
-	
+
+	public void setCartesDePaiement(List<CartePaiement> cartesDePaiement) {
+		this.cartesDePaiement = cartesDePaiement;
+	}
+
 	public List<Commentaire> getCommentaires() {
 		return commentaires;
 	}

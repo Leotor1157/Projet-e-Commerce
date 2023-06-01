@@ -62,7 +62,6 @@
 					required="true"
 					requiredMessage="La date de naissance est obligatoire">
 					<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
-					(jj/mm/aaaa)
 				</h:inputText>
 				<h:message for="dateNaissance" style="color:red"></h:message>
 
@@ -178,8 +177,7 @@
 				<h:inputText id="dateFinValidite" value="#{cartePaiementbean.dateFinValidite}"
 					required="true"
 					requiredMessage="La date de fin de validite est obligatoire">
-					<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
-					(jj/mm/aaaa)
+					<f:convertDateTime pattern="MM/yyyy"></f:convertDateTime>
 				</h:inputText>
 				<h:message for="dateFinValidite" style="color:red"></h:message>
 
@@ -280,5 +278,3 @@
 
 </h:body>
 </html>
-
-
