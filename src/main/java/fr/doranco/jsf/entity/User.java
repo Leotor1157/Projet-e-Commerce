@@ -128,8 +128,14 @@ public class User implements Serializable {
 	public List<Commande> getCommandes() {
 		return commandes;
 	}
+<<<<<<< HEAD
 	
 	public List<CartePaiement> getCartesDePaiement() {
+=======
+
+	public List<CartePaiement> getCartesDePaiement() {
+
+>>>>>>> fec71fd5e28ecd08baacc78e90597db2bfb1172c
 		return cartesDePaiement;
 	}
 
