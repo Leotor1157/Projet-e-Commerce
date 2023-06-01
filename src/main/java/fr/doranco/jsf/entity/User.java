@@ -22,7 +22,7 @@ public class User implements Serializable {
 	private String telephone;
 	private List<Adresse> adresses;
 	private List<Commande> commandes;
-	private List<CartePaiement> cartesDePayement;
+	private List<CartePaiement> cartesDePaiement;
 	private List<Commentaire> commentaires;
 	private List<ArticlePanier> panier;
 
@@ -42,7 +42,7 @@ public class User implements Serializable {
 	public User() {
 		this.adresses = new ArrayList<Adresse>();
 		this.commandes = new ArrayList<Commande>();
-		this.cartesDePayement = new ArrayList<CartePaiement>();
+		this.cartesDePaiement = new ArrayList<CartePaiement>();
 		this.commentaires = new ArrayList<Commentaire>();
 		this.panier = new ArrayList<ArticlePanier>();
 	}
@@ -130,7 +130,7 @@ public class User implements Serializable {
 	}
 
 	public List<CartePaiement> getCartesDePayement() {
-		return cartesDePayement;
+		return cartesDePaiement;
 	}
 	
 	public List<Commentaire> getCommentaires() {

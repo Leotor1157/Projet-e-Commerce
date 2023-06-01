@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import fr.doranco.jsf.entity.Adresse;
 import fr.doranco.jsf.entity.User;
@@ -75,7 +77,7 @@ public class UserDao implements IUserDao {
 		PreparedStatement ps = null;
 		try {
 			connection = DataBaseConnection.getConnection();
-			String requete = "DELETE FROM user WHERE id = ?";
+			String requete = "DELETE FROM utilisateur WHERE id = ?";
 			ps = connection.prepareStatement(requete);
 			ps.setInt(1, id);
 
