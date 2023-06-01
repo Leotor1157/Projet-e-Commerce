@@ -22,7 +22,7 @@ public class AdresseDao implements IAdresseDao {
 		int id = -1;
 		try {
 			connection = DataBaseConnection.getConnection();
-			String requete = "INSERT INTO adresse(numero, rue, ville, code_postal, user_id) " + "VALUES(?,?,?,?,?)";
+			String requete = "INSERT INTO adresse(numero, rue, ville, code_postal, utilisateur_id) " + "VALUES(?,?,?,?,?)";
 			ps = connection.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, adresse.getNumero());
 			ps.setString(2, adresse.getRue());
@@ -100,7 +100,7 @@ public class AdresseDao implements IAdresseDao {
 		List<Adresse> adresses = new ArrayList<Adresse>();
 		try {
 			connection = DataBaseConnection.getConnection();
-			String requete = "SELECT * FROM adresse WHERE user_id = ?";
+			String requete = "SELECT * FROM adresse WHERE utilisateur_id = ?";
 			ps = connection.prepareStatement(requete);
 			ps.setInt(1, userId);
 
@@ -192,7 +192,7 @@ public class AdresseDao implements IAdresseDao {
 		PreparedStatement ps = null;
 		try {
 			connection = DataBaseConnection.getConnection();
-			String requete = "DELETE FROM adresse WHERE user_id = ?";
+			String requete = "DELETE FROM adresse WHERE utilisateur_id = ?";
 			ps = connection.prepareStatement(requete);
 			ps.setInt(1, userId);
 

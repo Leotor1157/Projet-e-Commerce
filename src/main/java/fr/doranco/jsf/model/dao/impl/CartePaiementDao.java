@@ -22,9 +22,9 @@ public class CartePaiementDao implements ICartepaiementDao {
             ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, cartepaiement.getNomProprietaire());
             ps.setString(2, cartepaiement.getPrenomProprietaire());
-            ps.setBytes(3, cartepaiement.getNumero());
+            ps.setString(3, cartepaiement.getNumero());
             ps.setDate(4, new java.sql.Date(cartepaiement.getDateFinValidite().getTime()));
-            ps.setBytes(5, cartepaiement.getCryptogramme());
+            ps.setString(5, cartepaiement.getCryptogramme());
             ps.setInt(6, cartepaiement.getUserId());
 
             ps.executeUpdate();
@@ -62,9 +62,9 @@ public class CartePaiementDao implements ICartepaiementDao {
             if (rs.next()) {
                 String nomProprietaire = rs.getString("nom_proprietaire");
                 String prenomProprietaire = rs.getString("prenom_proprietaire");
-                byte[] numero = rs.getBytes("numero");
+                String numero = rs.getString("numero");
                 java.util.Date dateFinValidite = rs.getDate("date_fin_validite");
-                byte[] cryptogramme = rs.getBytes("cryptogramme");
+                String cryptogramme = rs.getString("cryptogramme");
                 int userId = rs.getInt("user_id");
 
                 cartepaiement = new CartePaiement();
@@ -100,9 +100,9 @@ public class CartePaiementDao implements ICartepaiementDao {
             ps = connection.prepareStatement(query);
             ps.setString(1, cartepaiement.getNomProprietaire());
             ps.setString(2, cartepaiement.getPrenomProprietaire());
-            ps.setBytes(3, cartepaiement.getNumero());
+            ps.setString(3, cartepaiement.getNumero());
             ps.setDate(4, new java.sql.Date(cartepaiement.getDateFinValidite().getTime()));
-            ps.setBytes(5, cartepaiement.getCryptogramme());
+            ps.setString(5, cartepaiement.getCryptogramme());
             ps.setInt(6, cartepaiement.getUserId());
             ps.setInt(7, cartepaiement.getId());
 

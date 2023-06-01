@@ -20,7 +20,7 @@ import fr.doranco.jsf.utils.Dates;
 public class UserDao implements IUserDao {
 
 	private final IAdresseDao adresseDao = new AdresseDao();
-	
+
 	@Override
 	public User addUser(User user) throws Exception {
 
@@ -29,7 +29,7 @@ public class UserDao implements IUserDao {
 		ResultSet rs = null;
 		try {
 			connection = DataBaseConnection.getConnection();
-			
+
 			String requete = "INSERT INTO utilisateur(prenom, nom, date_naissance, email, password, is_actif, profil, telephone )"
 					+ " VALUES(?,?,?,?,?,?,?,?)";
 			ps = connection.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
@@ -38,11 +38,10 @@ public class UserDao implements IUserDao {
 			ps.setDate(3, Dates.convertDateUtilToSql(user.getDateNaissance()));
 			ps.setString(4, user.getEmail());
 			ps.setString(5, user.getPassword());
-			ps.setBoolean(6,user.getIsActif());
-			ps.setString(7,user.getProfil().toString());
-			ps.setString(8,user.getTelephone());
-			
-			
+			ps.setBoolean(6, user.getIsActif());
+			ps.setString(7, user.getProfil().toString());
+			ps.setString(8, user.getTelephone());
+
 			ps.executeUpdate();
 			rs = ps.getGeneratedKeys();
 			if (rs != null && rs.next()) {
@@ -53,7 +52,7 @@ public class UserDao implements IUserDao {
 					adresseDao.addAdresse(a, user.getId());
 				}
 			}
-			
+
 		} finally {
 			if (rs != null && !rs.isClosed()) {
 				rs.close();
@@ -72,7 +71,7 @@ public class UserDao implements IUserDao {
 	public void deleteUser(int id) throws Exception {
 
 		adresseDao.deleteAdresses(id);
-		
+
 		Connection connection = null;
 		PreparedStatement ps = null;
 		try {
@@ -120,8 +119,7 @@ public class UserDao implements IUserDao {
 					user.setTelephone(rs.getString("telephone"));
 					user.setProfil(ProfilEnum.valueOf(rs.getString("profil")));
 					user.setIsActif(rs.getBoolean("is_actif"));
-					
-					
+
 					List<Adresse> adresses = adresseDao.getAdresses(rs.getInt("id"));
 					for (Adresse a : adresses) {
 						user.getAdresses().add(a);
@@ -143,4 +141,78 @@ public class UserDao implements IUserDao {
 		return users;
 	}
 
+	@Override
+	public User getUserByEmail(String email) throws Exception {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		User user = null;
+		try {
+			connection = DataBaseConnection.getConnection();
+			String requete = "SELECT * FROM utilisateur where email = ?";
+			ps = connection.prepareStatement(requete);
+			ps.setString(1, email);
+
+			ps.execute();
+			rs = ps.getResultSet();
+
+			if (rs != null) {
+				while (rs.next()) {
+					user = new User();
+					user.setId(rs.getInt("id"));
+					user.setPrenom(rs.getString("prenom"));
+					user.setNom(rs.getString("nom"));
+					user.setDateNaissance(Dates.convertDateSqlToUtil(rs.getDate("date_naissance")));
+					user.setEmail(rs.getString("email"));
+					user.setPassword(rs.getString("password"));
+					user.setTelephone(rs.getString("telephone"));
+					user.setProfil(ProfilEnum.valueOf(rs.getString("profil")));
+					user.setIsActif(rs.getBoolean("is_actif"));
+
+				}
+			}
+		} finally {
+			if (rs != null && !rs.isClosed()) {
+				rs.close();
+			}
+			if (ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if (connection != null && !connection.isClosed()) {
+				connection.close();
+			}
+		}
+		return user;
+	}
+
+	@Override
+	public void updateUser(User user) throws Exception {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		try {
+			connection = DataBaseConnection.getConnection();
+			String requete = "UPDATE utilisateur SET nom = ?, prenom = ?, date_naissance = ?, is_actif = ?, "
+						+ "profil = ?, email = ?, password = ?, telephone = ? " + "WHERE id = ?";
+			ps = connection.prepareStatement(requete);
+			ps.setString(1, user.getNom());
+			ps.setString(2, user.getPrenom());
+			ps.setDate(3, Dates.convertDateUtilToSql(user.getDateNaissance()));
+			ps.setBoolean(4, user.getIsActif());
+			ps.setString(5, user.getProfil().toString());
+			ps.setString(6, user.getEmail());
+			ps.setString(7, user.getPassword());
+			ps.setString(8, user.getTelephone());
+			ps.setInt(9, user.getId());
+
+			ps.executeUpdate();
+
+		} finally {
+			if (ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if (connection != null && !connection.isClosed()) {
+				connection.close();
+			}
+		}
+	}
 }

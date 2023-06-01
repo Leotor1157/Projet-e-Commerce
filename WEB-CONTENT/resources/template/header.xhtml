@@ -4,7 +4,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <body>
 	<ui:composition>
@@ -12,7 +13,27 @@
 		<!-- <h1>Ajouter votre header ou garder celui par defaut</h1> -->
 
 		<h:graphicImage library="images" name="doranco.png"></h:graphicImage>
+		<h3>Site Ecommerce</h3>
 		
+		 <h:form>
+
+            <c:set scope="request" var="row" property="x" value="#{userbean.isActif}"/>
+
+            <c:if test="#{userbean.isActif}">
+                <h:outputLabel value="Bonjour #{userbean.nom}"/>
+                <h:commandLink action="#{userbean.DeconnexionUser()}">
+						<h:outputText value="Deconnexion"></h:outputText>
+					</h:commandLink>
+            </c:if>
+
+            <c:if test="#{!userbean.isActif}">
+                <h:commandLink action="login.xhtml">
+						<h:outputText value="Se connecter"></h:outputText>
+					</h:commandLink>
+            </c:if>
+
+        </h:form>
+        
 	</ui:composition>
 </body>
 </html>

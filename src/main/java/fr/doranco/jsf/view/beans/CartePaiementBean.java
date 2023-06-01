@@ -31,8 +31,13 @@ public class CartePaiementBean {
 	}
 
 	public void addCartePaiement() {
-		//CartePaiement cartePaiement = new CartePaiement(nomProprietaire, prenomProprietaire, numero, dateFinValidite, cryptogramme);
-		//cartePaiements.add(cartePaiement);
+		CartePaiement cartePaiement = new CartePaiement();
+		cartePaiement.setNomProprietaire(nomProprietaire);
+		cartePaiement.setPrenomProprietaire(prenomProprietaire);
+		cartePaiement.setNumero(numero);
+		cartePaiement.setDateFinValidite(dateFinValidite);
+		cartePaiement.setCryptogramme(cryptogramme);
+		cartePaiements.add(cartePaiement);
 	}
 	
 	public void initializeCartePaiement() {
@@ -83,7 +88,7 @@ public class CartePaiementBean {
 		this.cryptogramme = cryptogramme;
 	}
 
-	public static List<CartePaiement> getCartePaiements() {
+	public List<CartePaiement> getCartePaiements() {
 		return cartePaiements;
 	}
 }

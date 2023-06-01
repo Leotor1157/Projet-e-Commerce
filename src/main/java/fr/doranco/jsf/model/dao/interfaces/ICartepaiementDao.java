@@ -4,8 +4,8 @@ import fr.doranco.jsf.entity.CartePaiement;
 
 public interface ICartepaiementDao {
 
-	void createCartepaiement(CartePaiement cartepaiement);
-	CartePaiement getCartepaiement(Integer id);
-    void updateCartepaiement(CartePaiement cartepaiement);
-    void deleteCartepaiement(CartePaiement cartepaiement);
+	void createCartepaiement(CartePaiement cartepaiement) throws Exception;
+	CartePaiement getCartepaiement(Integer id) throws Exception;
+    void updateCartepaiement(CartePaiement cartepaiement) throws Exception;
+    void deleteCartepaiement(CartePaiement cartepaiement) throws Exception;
 }
