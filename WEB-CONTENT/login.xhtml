@@ -6,14 +6,62 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
+
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Formation DORANCO</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Formation DORANCO</title>
 </head>
 
 <body>
-	<h4>Connexion d'un utilisateur</h4>
+	<!-- DECLARATION DU TEMPLATE DONT LA PAGE EST CLIENTE -->
+	<ui:composition template="/resources/template/layout.xhtml">
+
+		<!-- Redefinition de la zone 'content' du layout  -->
+		<ui:define name="content">
+			<f:view>
+				<h:form>
+					<h2>Connexion d'un utilisateur</h2>
+
+					<h:panelGroup id="ConnexionUser">
+
+						<h:panelGrid columns="3" cellpadding="0" cellspacing="8">
+
+							<h:outputLabel value="Email : "></h:outputLabel>
+							<h:inputText id="email" value="#{userbean.email}" required="true"
+								requiredMessage="L'email est obligatoire !">
+							</h:inputText>
+							<h:message for="email" style="color:red"></h:message>
+
+							<h:outputLabel value="Mot de passe : "></h:outputLabel>
+							<h:inputSecret id="password" value="#{userbean.password}"
+								required="true"
+								requiredMessage="Le mot de passe est obligatoire !">
+								<f:validateLength minimum="8" maximum="30"></f:validateLength>
+							</h:inputSecret>
+							<h:message for="password" style="color:red"></h:message>
+						</h:panelGrid>
+					</h:panelGroup>
+
+					<h:commandButton id="connexionUser" value="Connexion"
+						action="#{userbean.connexionUser()}">
+					</h:commandButton>
+					
+					<p/>
+					
+					<h:panelGroup id="panelMessagess">
+						<h:panelGrid columns="1" cellpadding="0" cellspacing="0">
+							<h:outputText value="#{userbean.messageSuccess}"
+								style="color:green"></h:outputText>
+							<h:outputText value="#{userbean.messageError}" style="color:red"></h:outputText>
+						</h:panelGrid>
+					</h:panelGroup>
+
+				</h:form>
+			</f:view>
+		</ui:define>
+
+	</ui:composition>
+
 </body>
 </html>
 

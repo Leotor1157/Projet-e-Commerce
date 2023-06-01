@@ -23,11 +23,11 @@ public class UserBean implements Serializable {
 	// injection de dépendance
 	@ManagedProperty(value = "#{adressebean}")
 	private static AdresseBean adresseBean;
-	
+
 	// injection de dépendance
 	@ManagedProperty(value = "#{cartePaiementbean}")
 	private static CartePaiementBean cartePaiementBean;
-	
+
 	@ManagedProperty(name = "nom", value = "DUPOND")
 	private String nom;
 
@@ -35,7 +35,7 @@ public class UserBean implements Serializable {
 	private String prenom;
 
 	private Date dateNaissance;
-	
+
 	private ProfilEnum profil;
 
 	@ManagedProperty(name = "email", value = "michel.dupont@doranco.fr")
@@ -43,8 +43,11 @@ public class UserBean implements Serializable {
 
 	private String password;
 	private String passwordConfirmation;
-	
+
 	private String telephone;
+
+	@ManagedProperty(name = "isActif", value = "false")
+	private Boolean isActif;
 
 	private String messageSuccess;
 	private String messageError;
@@ -61,13 +64,12 @@ public class UserBean implements Serializable {
 			return userMetier.getUsers();
 		} catch (Exception e) {
 			messageSuccess = "";
-			messageError = "Erreur lors de la récupération de la liste des utilisateurs !\n"
-					+ e.getMessage();
+			messageError = "Erreur lors de la récupération de la liste des utilisateurs !\n" + e.getMessage();
 			e.printStackTrace();
 			return null;
 		}
 	}
-	
+
 	public String addUser() {
 
 		try {
@@ -95,14 +97,62 @@ public class UserBean implements Serializable {
 			messageError = "";
 			adresseBean.getAdresses().clear();
 			adresseBean.initializeAdresse();
+			cartePaiementBean.getCartePaiements().clear();
+			cartePaiementBean.initializeCartePaiement();
 			initializeUser();
 
-			//return "";
+			// return "";
 			return "login.xhtml";
 
 		} catch (Exception e) {
 			messageSuccess = "";
-			messageError = "Erreur lors de la création de l'utilisateur !\n"
+			messageError = "Erreur lors de la création de l'utilisateur !\n" + e.getMessage();
+			e.printStackTrace();
+			return "";
+		}
+	}
+
+	public String connexionUser() {
+		try {
+
+			User user = userMetier.getUserByEmail(email);
+			if (password.equals(user.getPassword())) {
+				messageSuccess = "Mot de passe valide !";
+				messageError = "";
+				user.setIsActif(true);
+				isActif = true;
+				userMetier.updateUser(user);
+				return "gestion_achats.xhtml";
+			} else {
+				messageSuccess = "";
+				messageError = "Erreur mot de passe incorrect !\n";
+				return "";
+			}
+
+		} catch (Exception e) {
+			messageSuccess = "";
+			messageError = "Connexion impossible, essayer avec une autre email ou un autre mot de passe !\n"
+					+ e.getMessage();
+			e.printStackTrace();
+			return "";
+		}
+	}
+
+	public String DeconnexionUser() {
+		try {
+
+			User user = userMetier.getUserByEmail(email);
+
+			messageSuccess = "Utilisateur Deconnecter !";
+			messageError = "";
+			user.setIsActif(false);
+			isActif = false;
+			userMetier.updateUser(user);
+			return "accueil.xhtml";
+
+		} catch (Exception e) {
+			messageSuccess = "";
+			messageError = "Connexion impossible, essayer avec une autre email ou un autre mot de passe !\n"
 					+ e.getMessage();
 			e.printStackTrace();
 			return "";
@@ -116,8 +166,7 @@ public class UserBean implements Serializable {
 			messageError = "";
 		} catch (Exception e) {
 			messageSuccess = "";
-			messageError = "Erreur lors de la suppression de l'utilisateur !\n"
-					+ e.getMessage();
+			messageError = "Erreur lors de la suppression de l'utilisateur !\n" + e.getMessage();
 			e.printStackTrace();
 		}
 	}
@@ -136,7 +185,15 @@ public class UserBean implements Serializable {
 	}
 
 	public void setAdresseBean(AdresseBean adresseBean) {
-		this.adresseBean = adresseBean;
+		UserBean.adresseBean = adresseBean;
+	}
+
+	public CartePaiementBean getCartePaiementBean() {
+		return cartePaiementBean;
+	}
+
+	public void setCartePaiementBean(CartePaiementBean cartePaiementBean) {
+		UserBean.cartePaiementBean = cartePaiementBean;
 	}
 
 	public String getPrenom() {
@@ -201,6 +258,14 @@ public class UserBean implements Serializable {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+
+	public Boolean getIsActif() {
+		return isActif;
+	}
+
+	public void setIsActif(Boolean isActif) {
+		this.isActif = isActif;
 	}
 
 	public String getMessageSuccess() {

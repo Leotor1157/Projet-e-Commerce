@@ -40,4 +40,15 @@ public class UserMetier implements IUserMetier {
 		
 	}
 
+	@Override
+	public User getUserByEmail(String email) throws Exception {
+		return userDao.getUserByEmail(email);
+	}
+
+	@Override
+	public void updateUser(User user) throws Exception {
+	userDao.updateUser(user);
+		
+	}
+
 }//test

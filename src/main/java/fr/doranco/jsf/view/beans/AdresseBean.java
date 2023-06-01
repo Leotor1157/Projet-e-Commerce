@@ -82,6 +82,4 @@ public class AdresseBean {
 	public List<Adresse> getAdresses() {
 		return adresses;
 	}
-	
-	
 }

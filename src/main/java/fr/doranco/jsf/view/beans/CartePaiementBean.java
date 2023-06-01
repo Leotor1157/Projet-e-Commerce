@@ -88,7 +88,7 @@ public class CartePaiementBean {
 		this.cryptogramme = cryptogramme;
 	}
 
-	public static List<CartePaiement> getCartePaiements() {
+	public List<CartePaiement> getCartePaiements() {
 		return cartePaiements;
 	}
 }
