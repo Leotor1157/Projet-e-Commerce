@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.doranco.jsf.entity.CartePaiement;
 import fr.doranco.jsf.model.connection.DataBaseConnection;
@@ -139,4 +141,48 @@ public class CartePaiementDao implements ICartepaiementDao {
             }
         }
     }
+
+	@Override
+	public List<CartePaiement> getCartesPaiements(Integer userId) throws Exception {
+
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<CartePaiement> cartePaiements = new ArrayList<CartePaiement>();
+		try {
+			connection = DataBaseConnection.getConnection();
+			String requete = "SELECT * FROM carte_paiement WHERE utilisateur_id = ?";
+			ps = connection.prepareStatement(requete);
+			ps.setInt(1, userId);
+
+			ps.execute();
+
+			rs = ps.getResultSet();
+
+			if (rs != null) {
+				while (rs.next()) {
+					CartePaiement cartePaiement = new CartePaiement();
+					cartePaiement.setId(rs.getInt("id"));
+					cartePaiement.setNomProprietaire(rs.getString("nom_proprietaire"));
+					cartePaiement.setPrenomProprietaire(rs.getString("prenom_proprietaire"));
+					cartePaiement.setNumero(rs.getString("numero"));
+					cartePaiement.setDateFinValidite(Dates.convertDateSqlToUtil(rs.getDate("Date_fin_validite")));
+					cartePaiement.setCryptogramme(rs.getString("cryptogramme"));
+					cartePaiements.add(cartePaiement);
+				}
+			}
+
+		} finally {
+			if (rs != null && !rs.isClosed()) {
+				rs.close();
+			}
+			if (ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if (connection != null && !connection.isClosed()) {
+				connection.close();
+			}
+		}
+		return cartePaiements;
+	}
 }

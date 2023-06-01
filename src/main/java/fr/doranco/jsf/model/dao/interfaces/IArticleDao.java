@@ -4,9 +4,9 @@ import fr.doranco.jsf.entity.Article;
 import java.util.List;
 
 public interface IArticleDao {
-    void createArticle(Article article);
-    Article getArticle(Integer id);
-    void updateArticle(Article article);
-    void deleteArticle(Article article);
-    List<Article> getAllArticles();
+    void createArticle(Article article) throws Exception;
+    Article getArticle(Integer id) throws Exception;
+    void updateArticle(Article article) throws Exception;
+    void deleteArticle(Article article) throws Exception;
+    List<Article> getAllArticles() throws Exception;
 }

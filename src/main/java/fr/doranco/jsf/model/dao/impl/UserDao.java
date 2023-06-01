@@ -134,6 +134,11 @@ public class UserDao implements IUserDao {
 					for (Adresse a : adresses) {
 						user.getAdresses().add(a);
 					}
+					
+					List<CartePaiement> CartePaiements = cartePaiementDao.getCartesPaiements(rs.getInt("id"));
+					for (CartePaiement a : CartePaiements) {
+						user.getCartesDePaiement().add(a);
+					}
 					users.add(user);
 				}
 			}
