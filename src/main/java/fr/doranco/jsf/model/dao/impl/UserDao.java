@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import fr.doranco.jsf.entity.Adresse;
 import fr.doranco.jsf.entity.CartePaiement;
@@ -133,6 +131,11 @@ public class UserDao implements IUserDao {
 					List<Adresse> adresses = adresseDao.getAdresses(rs.getInt("id"));
 					for (Adresse a : adresses) {
 						user.getAdresses().add(a);
+					}
+					
+					List<CartePaiement> CartePaiements = cartePaiementDao.getCartesPaiements(rs.getInt("id"));
+					for (CartePaiement a : CartePaiements) {
+						user.getCartesDePaiement().add(a);
 					}
 					users.add(user);
 				}

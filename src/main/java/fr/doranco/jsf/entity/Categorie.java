@@ -11,6 +11,10 @@ public class Categorie {
 	private String photo;
 	private List<Article> articles;
 	
+	
+	public Categorie() {
+	}
+
 	public Categorie(String nom, Integer remise, Boolean isRemiseCumulable, String photo) {
 		this.nom = nom;
 		this.remise = remise;

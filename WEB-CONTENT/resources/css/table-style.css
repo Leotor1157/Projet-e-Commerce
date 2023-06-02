@@ -12,7 +12,11 @@
 .order-table-odd-row {
 	text-align: center;
 	background: none repeat scroll 0 0 #FFFFFF;
+<<<<<<< HEAD
 	border-top: 1px solid #000;
+=======
+	border-top: 1px solid #BBBBBB;
+>>>>>>> 8b3dd82a07dc361800a68856d501535526418727
 }
 
 .order-table-even-row {

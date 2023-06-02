@@ -1,11 +1,11 @@
-package fr.doranco.jsf.model.dao.interfaces;
+package fr.doranco.jsf.control.interfaces;
 
 import java.util.List;
 
 import fr.doranco.jsf.entity.Categorie;
 
-public interface ICategorieDao {
-
+public interface ICategorieMetier {
+	
 	void createCategorie(Categorie categorie) throws Exception;
 	Categorie getCategorie(Integer id) throws Exception;
 	List<Categorie> getAllCategories() throws Exception;

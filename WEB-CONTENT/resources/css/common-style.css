@@ -10,12 +10,18 @@
 #header{
 	
 	width: 100%;
+<<<<<<< HEAD
 	height:100%;
 	margin-bottom:0px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	background-color: #9E9E9E;
+=======
+	min-height:120px;
+	border: 1px solid rgb(255, 0, 0);
+	margin-bottom:16px;
+>>>>>>> 8b3dd82a07dc361800a68856d501535526418727
 }
 
 #content{

@@ -1,4 +1,4 @@
-package fr.doranco.cryptage.algo;
+package fr.doranco.jsf.algo;
 
 import java.security.Key;
 

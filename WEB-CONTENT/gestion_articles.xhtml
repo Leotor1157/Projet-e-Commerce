@@ -17,22 +17,8 @@
 		<ui:define name="content">
 			<f:view>
 				<h:form>
-					<h2>Gestion achats</h2>
-					<h:panelGrid columns="3" cellpadding="3" cellspacing="8">
-
-						<ui:repeat value="#{categoriebean.allCategories}" var="a">
-							<h:commandLink action="login">
-								<h:outputText style="color:black ; font-size:1.6em"
-									value="#{a.nom}" />
-								<br></br>
-								<h:outputText style="color:red ; font-size:1.2em"
-									value="#{a.remise} %" />
-								<br></br>
-								<h:graphicImage url="#{a.photo}" height="200" width="200"></h:graphicImage>
-								<br></br>
-							</h:commandLink>
-						</ui:repeat>
-					</h:panelGrid>
+					<h2>Gestion articles</h2>
+					
 				</h:form>
 			</f:view>
 		</ui:define>

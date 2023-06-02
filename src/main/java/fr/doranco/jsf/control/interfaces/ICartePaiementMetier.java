@@ -1,10 +1,10 @@
-package fr.doranco.jsf.model.dao.interfaces;
+package fr.doranco.jsf.control.interfaces;
 
 import java.util.List;
 
 import fr.doranco.jsf.entity.CartePaiement;
 
-public interface ICartepaiementDao {
+public interface ICartePaiementMetier {
 
 	void createCartepaiement(CartePaiement cartepaiement) throws Exception;
 	CartePaiement getCartepaiement(Integer id) throws Exception;

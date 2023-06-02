@@ -1,7 +1,6 @@
 package fr.doranco.jsf.view.beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -91,7 +90,7 @@ public class UserBean implements Serializable {
 			adresseBean.getAdresses().forEach(a -> user.getAdresses().add(a));
 			cartePaiementBean.getCartePaiements().forEach(a -> user.getCartesDePaiement().add(a));
 
-			User addedUser = userMetier.addUser(user);
+			userMetier.addUser(user);
 
 			messageSuccess = "Compte créé avec succès.";
 			messageError = "";
@@ -122,7 +121,21 @@ public class UserBean implements Serializable {
 				user.setIsActif(true);
 				isActif = true;
 				userMetier.updateUser(user);
-				return "gestion_achats.xhtml";
+				switch(user.getProfil()) {
+				case CLIENT:
+					return "gestion_achats.xhtml";
+					
+				case MAGASINIER:
+					return "gestion_articles.xhtml";
+					
+				case ADMIN:
+					return "gestion_admin.xhtml";
+					
+				default:
+					return "gestion_achats.xhtml";
+					
+				}
+				
 			} else {
 				messageSuccess = "";
 				messageError = "Erreur mot de passe incorrect !\n";

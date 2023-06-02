@@ -7,7 +7,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import fr.doranco.jsf.entity.Adresse;
 import fr.doranco.jsf.entity.CartePaiement;
 
 @ManagedBean(name = "cartePaiementbean")
