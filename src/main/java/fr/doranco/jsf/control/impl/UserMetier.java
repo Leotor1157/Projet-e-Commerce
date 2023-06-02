@@ -51,4 +51,9 @@ public class UserMetier implements IUserMetier {
 		
 	}
 
+	@Override
+	public User getUserActif() throws Exception {
+		// TODO Auto-generated method stub
+		return userDao.getUserActif();
+	}
 }
