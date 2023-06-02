@@ -11,8 +11,8 @@
 
 .order-table-odd-row {
 	text-align: center;
-	background: none repeat scroll 0 0 #FFFFFFF;
-	border-top: 1px solid #BBBBBB;
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-top: 1px solid #000;
 }
 
 .order-table-even-row {

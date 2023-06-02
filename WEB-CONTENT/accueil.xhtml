@@ -9,10 +9,11 @@
 	
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<h:outputStylesheet library="css" name="accueil-style.css" />
 	<title>Formation DORANCO</title>
 </head>
 
-<body>
+<body id="body">
 	<!-- DECLARATION DU TEMPLATE DONT LA PAGE EST CLIENTE -->
 	<ui:composition template="/resources/template/layout.xhtml">
 
@@ -20,7 +21,7 @@
 		<ui:define name="content">
 			<f:view>
 				<h:form>
-					<h2>Formulaire d'enregistrement Pour un stagiaire DORANCO</h2>
+					<h2 id="text">Formulaire d'enregistrement Pour un stagiaire DORANCO</h2>
 					<h:commandLink action="register">
 						<h:outputText value="Cliquez ici pour vous enregistrez..."></h:outputText>
 					</h:commandLink>
