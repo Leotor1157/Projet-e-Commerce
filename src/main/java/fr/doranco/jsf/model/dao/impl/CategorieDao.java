@@ -7,11 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.doranco.jsf.entity.CartePaiement;
 import fr.doranco.jsf.entity.Categorie;
 import fr.doranco.jsf.model.connection.DataBaseConnection;
 import fr.doranco.jsf.model.dao.interfaces.ICategorieDao;
-import fr.doranco.jsf.utils.Dates;
 
 public class CategorieDao implements ICategorieDao {
 

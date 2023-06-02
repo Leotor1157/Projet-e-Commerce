@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<h:outputStylesheet library="css" name="table-style.css" />
+<title>Formation DORANCO</title>
+</head>
+
+<body>
+	<!-- DECLARATION DU TEMPLATE DONT LA PAGE EST CLIENTE -->
+	<ui:composition template="/resources/template/layout.xhtml">
+
+		<!-- Redefinition de la zone 'content' du layout  -->
+		<ui:define name="content">
+			<f:view>
+				<h:form>
+					<h2>Gestion admin</h2>
+
+					<h:form>
+						<h4>Listes des utilisateurs</h4>
+
+						<h:dataTable id="datatable" value="#{userbean.getUsers()}" var="u"
+							styleClass="order-table" headerClass="order-table-header"
+							rowClasses="order-table-odd-row,order-table-even-row">
+
+							<h:column>
+								<!-- column header -->
+								<f:facet name="header">Prenom</f:facet>
+								<!-- row record -->
+								<h:outputText value="#{u.prenom}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Nom</f:facet>
+								<h:outputText value="#{u.nom}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Email</f:facet>
+								<h:outputText value="#{u.email}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Mot de passe</f:facet>
+								<h:outputText value="#{u.password}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Date de Naissance</f:facet>
+								<h:outputText value="#{u.dateNaissance}">
+									<f:convertDateTime pattern="E, MM yyyy"></f:convertDateTime>
+								</h:outputText>
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Numero de telephone</f:facet>
+								<h:outputText value="#{u.telephone}" />
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Adresse(s)</f:facet>
+								<ui:repeat value="#{u.adresses}" var="a">
+									<h:outputText
+										value="#{a.numero} #{a.rue} #{a.codePostal} #{a.ville}" />
+									<br />
+								</ui:repeat>
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Carte de Paiement(s)</f:facet>
+								<ui:repeat value="#{u.cartesDePaiement}" var="a">
+									<h:outputText
+										value="#{a.nomProprietaire} #{a.prenomProprietaire} #{a.numero}" />
+									<br />
+								</ui:repeat>
+							</h:column>
+
+							<h:column>
+								<f:facet name="header">Action</f:facet>
+								<h:commandButton value="Supprimer"
+									action="#{userbean.deleteUser(u)}" />
+							</h:column>
+
+						</h:dataTable>
+					</h:form>
+				</h:form>
+			</f:view>
+		</ui:define>
+
+	</ui:composition>
+
+</body>
+</html>

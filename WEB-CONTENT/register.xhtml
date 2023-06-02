@@ -7,7 +7,6 @@
 
 <head>
 <!--Intégration du fichier CSS dans la page-->
-<h:outputStylesheet library="css" name="table-style.css" />
 <h:outputStylesheet library="css" name="common-style.css" />
 </head>
 
@@ -173,7 +172,7 @@
 				</h:inputText>
 				<h:message for="numero" style="color:red"></h:message>
 				
-				<h:outputLabel value="Date de fin de validite : "></h:outputLabel>
+				<h:outputLabel value="Date de fin de validite (MM/aa) : "></h:outputLabel>
 				<h:inputText id="dateFinValidite" value="#{cartePaiementbean.dateFinValidite}"
 					required="true"
 					requiredMessage="La date de fin de validite est obligatoire">
@@ -207,74 +206,5 @@
 			</ui:repeat>
 		</h:panelGrid>
 	</h:form>
-
-	<h:form>
-		<h4>Listes des utilisateurs</h4>
-
-		<h:dataTable id="datatable" value="#{userbean.getUsers()}" var="u"
-			styleClass="order-table" headerClass="order-table-header"
-			rowClasses="order-table-odd-row,order-table-even-row">
-
-			<h:column>
-				<!-- column header -->
-				<f:facet name="header">Prénom</f:facet>
-				<!-- row record -->
-				<h:outputText value="#{u.prenom}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">Nom</f:facet>
-				<h:outputText value="#{u.nom}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">Email</f:facet>
-				<h:outputText value="#{u.email}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">Mot de passe</f:facet>
-				<h:outputText value="#{u.password}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">Date de Naissance</f:facet>
-				<h:outputText value="#{u.dateNaissance}">
-					<f:convertDateTime pattern="E, dd MMMM yyyy"></f:convertDateTime>
-				</h:outputText>
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">Numero de telephone</f:facet>
-				<h:outputText value="#{u.telephone}" />
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">Adresse(s)</f:facet>
-				<ui:repeat value="#{u.adresses}" var="a">
-					<h:outputText
-						value="#{a.numero} #{a.rue} #{a.codePostal} #{a.ville}" />
-					<br />
-				</ui:repeat>
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">Carte de Paiement(s)</f:facet>
-				<ui:repeat value="#{u.cartesDePaiement}" var="a">
-					<h:outputText
-						value="#{a.nomProprietaire} #{a.prenomProprietaire} #{a.numero}" />
-					<br />
-				</ui:repeat>
-			</h:column>
-
-			<h:column>
-				<f:facet name="header">Action</f:facet>
-				<h:commandButton value="Supprimer"
-					action="#{userbean.deleteUser(u)}" />
-			</h:column>
-
-		</h:dataTable>
-	</h:form>
-
 </h:body>
 </html>

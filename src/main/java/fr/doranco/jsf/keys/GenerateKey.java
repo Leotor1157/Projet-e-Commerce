@@ -1,4 +1,4 @@
-package fr.doranco.cryptage.keys;
+package fr.doranco.jsf.keys;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
