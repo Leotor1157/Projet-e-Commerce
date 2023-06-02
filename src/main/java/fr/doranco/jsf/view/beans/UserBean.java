@@ -27,17 +27,14 @@ public class UserBean implements Serializable {
 	@ManagedProperty(value = "#{cartePaiementbean}")
 	private static CartePaiementBean cartePaiementBean;
 
-	@ManagedProperty(name = "nom", value = "DUPOND")
 	private String nom;
 
-	@ManagedProperty(name = "prenom", value = "Michel")
 	private String prenom;
 
 	private Date dateNaissance;
 
 	private ProfilEnum profil;
 
-	@ManagedProperty(name = "email", value = "michel.dupont@doranco.fr")
 	private String email;
 
 	private String password;
@@ -94,6 +91,7 @@ public class UserBean implements Serializable {
 
 			messageSuccess = "Compte créé avec succès.";
 			messageError = "";
+
 			adresseBean.getAdresses().clear();
 			adresseBean.initializeAdresse();
 			cartePaiementBean.getCartePaiements().clear();
@@ -101,8 +99,12 @@ public class UserBean implements Serializable {
 			initializeUser();
 
 			// return "";
-			return "login.xhtml";
+			if (profil.equals(ProfilEnum.ADMIN)) {
+				return "";
 
+			} else {
+				return "login.xhtml";
+			}
 		} catch (Exception e) {
 			messageSuccess = "";
 			messageError = "Erreur lors de la création de l'utilisateur !\n" + e.getMessage();
@@ -110,32 +112,87 @@ public class UserBean implements Serializable {
 			return "";
 		}
 	}
+	
+	public String addAdminUser() {
+
+		try {
+
+			User user = new User();
+			user.setNom(nom);
+			user.setPrenom(prenom);
+			user.setDateNaissance(dateNaissance);
+			user.setEmail(email);
+			user.setProfil(profil);
+			user.setPassword(password);
+			user.setTelephone(telephone);
+
+			adresseBean.getAdresses().forEach(a -> user.getAdresses().add(a));
+			cartePaiementBean.getCartePaiements().forEach(a -> user.getCartesDePaiement().add(a));
+
+			userMetier.addUser(user);
+
+			messageSuccess = "Compte créé avec succès.";
+			messageError = "";
+
+			adresseBean.getAdresses().clear();
+			adresseBean.initializeAdresse();
+			cartePaiementBean.getCartePaiements().clear();
+			cartePaiementBean.initializeCartePaiement();
+			initializeUser();		
+
+				return "";
+			
+		} catch (Exception e) {
+			messageSuccess = "";
+			messageError = "Erreur lors de la création de l'utilisateur !\n" + e.getMessage();
+			e.printStackTrace();
+			return "";
+		}
+	}
+	
 
 	public String connexionUser() {
 		try {
 
 			User user = userMetier.getUserByEmail(email);
+			nom = user.getNom();
 			if (password.equals(user.getPassword())) {
 				messageSuccess = "Mot de passe valide !";
 				messageError = "";
 				user.setIsActif(true);
 				isActif = true;
 				userMetier.updateUser(user);
-				switch(user.getProfil()) {
+				adresseBean.getAdresses().clear();
+				adresseBean.initializeAdresse();
+				cartePaiementBean.getCartePaiements().clear();
+				cartePaiementBean.initializeCartePaiement();
+				switch (user.getProfil()) {
 				case CLIENT:
+					initializeUser();
+					messageSuccess = "";
+					messageError = "";
 					return "gestion_achats.xhtml";
-					
+
 				case MAGASINIER:
+					initializeUser();
+					messageSuccess = "";
+					messageError = "";
 					return "gestion_articles.xhtml";
-					
+
 				case ADMIN:
+					initializeUser();
+					messageSuccess = "";
+					messageError = "";
 					return "gestion_admin.xhtml";
-					
+
 				default:
+					initializeUser();
+					messageSuccess = "";
+					messageError = "";
 					return "gestion_achats.xhtml";
-					
+
 				}
-				
+
 			} else {
 				messageSuccess = "";
 				messageError = "Erreur mot de passe incorrect !\n";
@@ -153,8 +210,8 @@ public class UserBean implements Serializable {
 
 	public String DeconnexionUser() {
 		try {
-
-			User user = userMetier.getUserByEmail(email);
+			User userActif = userMetier.getUserActif();
+			User user = userMetier.getUserByEmail(userActif.getEmail());
 
 			messageSuccess = "Utilisateur Deconnecter !";
 			messageError = "";
@@ -185,7 +242,6 @@ public class UserBean implements Serializable {
 	}
 
 	private void initializeUser() {
-		this.nom = "";
 		this.prenom = "";
 		this.email = "";
 		this.profil = ProfilEnum.CLIENT;

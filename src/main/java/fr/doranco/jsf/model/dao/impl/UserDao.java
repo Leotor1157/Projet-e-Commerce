@@ -228,4 +228,47 @@ public class UserDao implements IUserDao {
 			}
 		}
 	}
+
+	@Override
+	public User getUserActif() throws Exception {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		User user = null;
+		try {
+			connection = DataBaseConnection.getConnection();
+			String requete = "SELECT * FROM utilisateur where is_actif = 1";
+			ps = connection.prepareStatement(requete);
+
+			ps.execute();
+			rs = ps.getResultSet();
+
+			if (rs != null) {
+				while (rs.next()) {
+					user = new User();
+					user.setId(rs.getInt("id"));
+					user.setPrenom(rs.getString("prenom"));
+					user.setNom(rs.getString("nom"));
+					user.setDateNaissance(Dates.convertDateSqlToUtil(rs.getDate("date_naissance")));
+					user.setEmail(rs.getString("email"));
+					user.setPassword(rs.getString("password"));
+					user.setTelephone(rs.getString("telephone"));
+					user.setProfil(ProfilEnum.valueOf(rs.getString("profil")));
+					user.setIsActif(rs.getBoolean("is_actif"));
+
+				}
+			}
+		} finally {
+			if (rs != null && !rs.isClosed()) {
+				rs.close();
+			}
+			if (ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if (connection != null && !connection.isClosed()) {
+				connection.close();
+			}
+		}
+		return user;
+	}
 }

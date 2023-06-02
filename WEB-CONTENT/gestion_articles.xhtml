@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -17,8 +18,208 @@
 		<ui:define name="content">
 			<f:view>
 				<h:form>
-					<h2>Gestion articles</h2>
-					
+					<h:commandLink action="gestion_achats.xhtml" style="margin-left:90%">
+						<h:outputText value="Categorie et article"></h:outputText>
+					</h:commandLink>
+					<h4>Gestion des categorie et des articles</h4>
+					<h:panelGroup id="panelUser">
+
+						<h:panelGrid columns="3" cellpadding="0" cellspacing="8">
+
+							<h:outputLabel value="Nom : "></h:outputLabel>
+							<h:inputText id="nom" value="#{userbean.nom}" required="true"
+								requiredMessage="Le Nom est obligatoire !">
+								<f:validateLength minimum="2" maximum="20" />
+								<f:validateRegex pattern="^[a-zA-Z-\s]*"></f:validateRegex>
+							</h:inputText>
+							<h:message for="nom" style="color:red"></h:message>
+
+							<h:outputLabel value="Prénom : "></h:outputLabel>
+							<h:inputText id="prenom" value="#{userbean.prenom}"
+								required="true" requiredMessage="Le Prénom est obligatoire !">
+								<f:validateLength minimum="2" maximum="20" />
+								<f:validateRegex pattern="^[a-zA-Z-\s]*"></f:validateRegex>
+							</h:inputText>
+							<h:message for="prenom" style="color:red"></h:message>
+
+							<h:outputLabel value="Email : "></h:outputLabel>
+							<h:inputText id="email" value="#{userbean.email}" required="true"
+								requiredMessage="L'email est obligatoire !">
+								<f:validateLength minimum="8" maximum="30" />
+							</h:inputText>
+							<h:message for="email" style="color:red"></h:message>
+
+							<h:outputLabel value="Mot de passe : "></h:outputLabel>
+							<h:inputSecret id="motDePasse" value="#{userbean.password}"
+								required="true"
+								requiredMessage="Le mot de passe est obligatoire !">
+								<f:validateLength minimum="8" maximum="30" />
+								<!-- 					<f:validateRegex pattern="^[a-z]{1,}[A-Z]{1,}[0-9]{1,}[@%!-+?]{1,}*"></f:validateRegex> -->
+							</h:inputSecret>
+							<h:message for="motDePasse" style="color:red"></h:message>
+
+							<h:outputLabel value="Confirmation Mot de passe : "></h:outputLabel>
+							<h:inputSecret id="motDePasseConfirmation"
+								value="#{userbean.passwordConfirmation}" required="true"
+								requiredMessage="Le mot de passe de confirmation est obligatoire !">
+								<f:validateLength minimum="8" maximum="30" />
+								<!-- 					<f:validateRegex pattern="^[a-z]{1,}[A-Z]{1,}[0-9]{1,}[@%!-+?]{1,}*"></f:validateRegex> -->
+							</h:inputSecret>
+							<h:message for="motDePasseConfirmation" style="color:red"></h:message>
+
+							<h:outputLabel value="Date de naissance : "></h:outputLabel>
+							<h:inputText id="dateNaissance" value="#{userbean.dateNaissance}"
+								required="true"
+								requiredMessage="La date de naissance est obligatoire">
+								<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+							</h:inputText>
+							<h:message for="dateNaissance" style="color:red"></h:message>
+
+							<h:outputLabel value="telephone" />
+							<h:inputText id="telephone" value="#{userbean.telephone}"
+								required="true"
+								requiredMessage="Le numero de telephone est obligatoire">
+								<f:validateLength minimum="10" maximum="10" />
+							</h:inputText>
+							<h:message for="telephone" style="color:red"></h:message>
+
+
+						</h:panelGrid>
+
+					</h:panelGroup>
+
+					<h:panelGroup id="panelButtons">
+						<h:panelGrid columns="3" cellpadding="0" cellspacing="8">
+							<h:commandButton id="addUser" value="Ajouter utilisateur"
+								action="#{userbean.addUser()}">
+							</h:commandButton>
+							<h:button id="alert" value="Alerte" onclick="alert('Bonjour !')">
+							</h:button>
+
+						</h:panelGrid>
+					</h:panelGroup>
+
+					<h:panelGroup id="panelMessagess">
+						<h:panelGrid columns="1" cellpadding="0" cellspacing="0">
+							<h:outputText value="#{userbean.messageSuccess}"
+								style="color:green"></h:outputText>
+							<h:outputText value="#{userbean.messageError}" style="color:red"></h:outputText>
+						</h:panelGrid>
+					</h:panelGroup>
+
+				</h:form>
+
+				<h:form>
+					<p>Adresse(s) :</p>
+					<h:panelGroup>
+
+						<h:panelGrid columns="3" cellpadding="0" cellspacing="8">
+							<h:outputLabel value="Numéro : "></h:outputLabel>
+							<h:inputText id="numero" value="#{adressebean.numero}"
+								required="true" requiredMessage="Le numéro est obligatoire !">
+							</h:inputText>
+							<h:message for="numero" style="color:red"></h:message>
+
+							<h:outputLabel value="Rue : "></h:outputLabel>
+							<h:inputText id="rue" value="#{adressebean.rue}" required="true"
+								requiredMessage="La rue est obligatoire !">
+							</h:inputText>
+							<h:message for="rue" style="color:red"></h:message>
+
+							<h:outputLabel value="Ville : "></h:outputLabel>
+							<h:inputText id="ville" value="#{adressebean.ville}"
+								required="true" requiredMessage="La ville est obligatoire !">
+							</h:inputText>
+							<h:message for="ville" style="color:red"></h:message>
+
+							<h:outputLabel value="Code postal : "></h:outputLabel>
+							<h:inputText id="codePostal" value="#{adressebean.codePostal}"
+								required="true"
+								requiredMessage="Le code postal est obligatoire !">
+							</h:inputText>
+							<h:message for="codePostal" style="color:red"></h:message>
+						</h:panelGrid>
+
+						<h:panelGrid columns="3" cellpadding="0" cellspacing="8">
+							<h:commandButton id="addAdresse" value="Ajouter l'adresse"
+								action="#{adressebean.addAdresse()}">
+							</h:commandButton>
+						</h:panelGrid>
+
+					</h:panelGroup>
+
+				</h:form>
+
+				<h:form>
+					<h:panelGrid columns="1" cellpadding="0" cellspacing="0">
+						<ui:repeat value="#{adressebean.adresses}" var="a">
+							<h:outputText style="color:blue"
+								value="#{a.numero} #{a.rue} #{a.codePostal} #{a.ville}" />
+							<br></br>
+						</ui:repeat>
+					</h:panelGrid>
+				</h:form>
+
+				<h:form>
+					<p>Carte de paiement(s) :</p>
+					<h:panelGroup>
+
+						<h:panelGrid columns="3" cellpadding="0" cellspacing="8">
+							<h:outputLabel value="nom proprietaire : "></h:outputLabel>
+							<h:inputText id="nomProprietaire"
+								value="#{cartePaiementbean.nomProprietaire}" required="true"
+								requiredMessage="Le nom du proprietaire de la carte est obligatoire !">
+							</h:inputText>
+							<h:message for="nomProprietaire" style="color:red"></h:message>
+
+							<h:outputLabel value="prenom proprietaire : "></h:outputLabel>
+							<h:inputText id="prenomProprietaire"
+								value="#{cartePaiementbean.prenomProprietaire}" required="true"
+								requiredMessage="Le prenom du proprietaire de la carte est obligatoire !">
+							</h:inputText>
+							<h:message for="prenomProprietaire" style="color:red"></h:message>
+
+							<h:outputLabel value="Numéro : "></h:outputLabel>
+							<h:inputText id="numero" value="#{cartePaiementbean.numero}"
+								required="true" requiredMessage="Le numéro est obligatoire !">
+							</h:inputText>
+							<h:message for="numero" style="color:red"></h:message>
+
+							<h:outputLabel value="Date de fin de validite (MM/aa) : "></h:outputLabel>
+							<h:inputText id="dateFinValidite"
+								value="#{cartePaiementbean.dateFinValidite}" required="true"
+								requiredMessage="La date de fin de validite est obligatoire">
+								<f:convertDateTime pattern="MM/yyyy"></f:convertDateTime>
+							</h:inputText>
+							<h:message for="dateFinValidite" style="color:red"></h:message>
+
+							<h:outputLabel value="Cryptogramme : "></h:outputLabel>
+							<h:inputText id="cryptogramme"
+								value="#{cartePaiementbean.cryptogramme}" required="true"
+								requiredMessage="Le cryptogramme est obligatoire !">
+							</h:inputText>
+							<h:message for="cryptogramme" style="color:red"></h:message>
+						</h:panelGrid>
+
+						<h:panelGrid columns="3" cellpadding="0" cellspacing="8">
+							<h:commandButton id="addCartePaiement"
+								value="Ajouter carte de paiement"
+								action="#{cartePaiementbean.addCartePaiement()}">
+							</h:commandButton>
+						</h:panelGrid>
+
+					</h:panelGroup>
+
+				</h:form>
+
+				<h:form>
+					<h:panelGrid columns="1" cellpadding="0" cellspacing="0">
+						<ui:repeat value="#{cartePaiementbean.cartePaiements}" var="a">
+							<h:outputText style="color:blue"
+								value="#{a.nomProprietaire} #{a.prenomProprietaire} #{a.numero} #{a.dateFinValidite} #{a.cryptogramme} " />
+							<br></br>
+						</ui:repeat>
+					</h:panelGrid>
 				</h:form>
 			</f:view>
 		</ui:define>

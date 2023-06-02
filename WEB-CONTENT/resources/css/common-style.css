@@ -1,12 +1,12 @@
 #page{
-	width: 800px;
+	width: 100%;
 	margin: 0 auto;
 }
 
 #header{
 	width: 100%;
 	min-height:120px;
-	border: 1px solid rgb(255, 0, 0);
+	border: 1px solid #000;
 	margin-bottom:16px;
 }
 
